@@ -70,7 +70,7 @@ void init_ehc(py::module_ &m) {
       .def("get_plan", &enforced_hill_climbing_search::EnforcedHillClimbingSearch::get_plan);
 }
 
-PYBIND11_MODULE(pydownward, m) {
+PYBIND11_MODULE(downward, m) {
     m.doc() = "Gabi's pybind11 example plugin"; // Optional module docstring
 
     py::options options;
