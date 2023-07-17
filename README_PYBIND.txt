@@ -13,8 +13,6 @@ Run with one of the following two commands
 $ ./fast-downward.py pybindings-command-line
 $ ./fast-downward.py pybindings-dynamic-import
 
-Notes on the integration into fast-downward
-
 
 Notes on the interface:
 
