@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
-from . import pydownward
+import importlib
+pydownward = importlib.import_module('builds.pybindings.search.downward')
 
 class MyHeuristic(pydownward.Heuristic):
     def __init__(self, task):
@@ -13,7 +14,7 @@ class MyHeuristic(pydownward.Heuristic):
         return ff
 
 def search():
-    pydownward.read_task("trypybindings/output.sas")
+    pydownward.read_task("builds/pybindings/search/output.sas")
     task = pydownward.get_root_task()
 
     h = MyHeuristic(task)

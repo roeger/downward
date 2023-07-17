@@ -808,9 +808,12 @@ fast_downward_plugin(
     NAME PYDOWNWARD
     HELP "Plugin for creating a pybind11 library for search algorithms and heuristics."
     SOURCES
-        pydownward/pydownward.cc
-    DEPENDS <PLUGIN_NAME_1> [ <PLUGIN_NAME_2> ... ]
+        pydownward
 )
+
+if (NOT PYBINDING_LIBRARY)
+    set(PLUGIN_PYDOWNWARD_ENABLED FALSE)
+endif()
 
 fast_downward_add_plugin_sources(PLANNER_SOURCES)
 

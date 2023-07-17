@@ -3,10 +3,8 @@ To install pybind11, use
 
 To test the current pybind setup, proceed as follows:
 
-$ ./build.py pybind_library
-$ cd builds/pybind_library/pybinsings
-$ make install
-Put some output.sas file into the directory downward/trypybindings/
+$ ./build.py pybindings
+Put some output.sas file into the directory builds/pybindings/release
 The test only runs enforced hill-climbing, which has a high likelihood
 to NOT solve a task. It can for example solve the first driverlog task,
 so if in doubt, use that one.
@@ -17,11 +15,6 @@ $ ./fast-downward.py pybindings-dynamic-import
 
 Notes on the integration into fast-downward
 
-* The command "make install" still needs to be done manually.
-  This could be integrated into build.py.
-* The path where the library is installed is now hard coded in
-  src/pybindings/CMakeLists.txt. This could be integrated into
-  build.py where the path is given as argument.
 
 Notes on the interface:
 

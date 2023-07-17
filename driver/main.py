@@ -22,11 +22,11 @@ def main():
 
     # The call of the python library is only provisionally here in main().
     if sys.argv[1] == "pybindings-command-line":
-        os.system("python3 -c 'from trypybindings import test; test.search()'")
+        os.system("python3 -c 'from driver import pydownward; pydownward.search()'")
         return
     if sys.argv[1] == "pybindings-dynamic-import":
-        test = importlib.import_module('trypybindings.test')
-        test.search()
+        pydownward = importlib.import_module('driver.pydownward')
+        pydownward.search()
         return
     
     args = arguments.parse_args()
