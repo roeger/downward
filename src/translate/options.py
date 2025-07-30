@@ -1,9 +1,30 @@
 import argparse
+import os
 import sys
 
 
+def infer_prog():
+    main_mod = sys.modules.get('__main__')
+
+    if main_mod is None:
+        return os.path.basename(sys.argv[0])
+
+    # Run via `python -m ...`
+    if getattr(main_mod, '__spec__', None) is not None:
+        module_name = main_mod.__spec__.name
+        python_exec = os.path.basename(sys.executable)
+        return f"{python_exec} -m {module_name}"
+
+    # Run as script directly
+    if hasattr(main_mod, '__file__'):
+        return os.path.basename(main_mod.__file__)
+
+    # Fallback
+    return os.path.basename(sys.argv[0])
+
+
 def parse_args():
-    argparser = argparse.ArgumentParser()
+    argparser = argparse.ArgumentParser(prog=infer_prog())
     argparser.add_argument(
         "domain", help="path to domain pddl file")
     argparser.add_argument(
