@@ -3,7 +3,7 @@ name: Ubuntu
 
 on:
   push:
-    branches: [*]
+    branches: [argparse-test]
   pull_request:
     branches: [main, release-*]
 
