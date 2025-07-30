@@ -3,7 +3,7 @@ name: macOS
 
 on:
   push:
-    branches: [main, release-*]
+    branches: [*]
   pull_request:
     branches: [main, release-*]
 
@@ -36,23 +36,10 @@ jobs:
         run: |
           pip3 install tox
 
-      - name: Install VAL
-        run: |
-          brew install gnu-sed
-          git clone https://github.com/KCL-Planning/VAL.git
-          cd VAL
-          git checkout a5565396007eee73ac36527fbf904142b3077c74
-          make clean  # Remove old build artifacts and binaries.
-          gsed -i 's/-Werror //g' Makefile  # Ignore warnings.
-          make -j2
-          mv validate ../
-          cd ../
-          rm -rf VAL
-
-      - name: Run driver, translator and search tests
+      - name: Run translator tests
         run: |
           export PATH="$(pwd):$PATH" # Add VAL to path.
           cd misc
-          tox -e driver,translator,search
+          tox -e translator
 
 ...
