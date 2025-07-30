@@ -12,6 +12,8 @@ def infer_prog():
     # Run via `python -m ...`
     if getattr(main_mod, '__spec__', None) is not None:
         module_name = main_mod.__spec__.name
+        if module_name.endswith('.__main__'):
+            module_name = module_name.rsplit('.', 1)[0]
         python_exec = os.path.basename(sys.executable)
         return f"{python_exec} -m {module_name}"
 
