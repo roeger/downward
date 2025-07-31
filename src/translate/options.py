@@ -1,28 +1,22 @@
+from pathlib import Path
 import argparse
-import os
 import sys
 
 
 def infer_prog():
-    main_mod = sys.modules.get('__main__')
+    main_mod = sys.modules['__main__']
+    spec = getattr(main_mod, '__spec__', None)
 
-    if main_mod is None:
-        return os.path.basename(sys.argv[0])
-
-    # Run via `python -m ...`
-    if getattr(main_mod, '__spec__', None) is not None:
-        module_name = main_mod.__spec__.name
+    if spec is not None:
+        # Invoked via `python -m ...`
+        module_name = spec.name
         if module_name.endswith('.__main__'):
             module_name = module_name.rsplit('.', 1)[0]
-        python_exec = os.path.basename(sys.executable)
+        python_exec = Path(sys.executable).name
         return f"{python_exec} -m {module_name}"
-
-    # Run as script directly
-    if hasattr(main_mod, '__file__'):
-        return os.path.basename(main_mod.__file__)
-
-    # Fallback
-    return os.path.basename(sys.argv[0])
+    else:
+        # Invoked as script directly.
+        return Path(sys.argv[0]).name
 
 
 def parse_args():
